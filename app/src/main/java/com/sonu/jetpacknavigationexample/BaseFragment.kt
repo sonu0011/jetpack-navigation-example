@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
-    private  val TAG = "BaseFragment"
+    private val TAG = "BaseFragment"
 
     private var _binding: VBinding? = null
+    val abc = "text"
 
     protected val binding get() = _binding!!
 
@@ -32,7 +33,6 @@ abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(TAG, "onCreateView: binding data $_binding")
         return binding.root
     }
 
@@ -46,8 +46,4 @@ abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
         _binding = getViewBinding()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
