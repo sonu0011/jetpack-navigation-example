@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.sonu.jetpacknavigationexample.HomeFragment"
-        android:label="HomeFragment">
+        android:label="Home">
 
 
         <action
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.sonu.jetpacknavigationexample.LoginFragment"
-        android:label="fragment_login"
+        android:label="Login"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_welcomeFragment"
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.sonu.jetpacknavigationexample.WelcomeFragment"
-        android:label="fragment_welcome"
+        android:label="{username}"
         tools:layout="@layout/fragment_welcome">
         <argument
             android:name="username"

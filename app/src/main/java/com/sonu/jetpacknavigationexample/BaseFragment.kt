@@ -1,6 +1,7 @@
 package com.sonu.jetpacknavigationexample
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
+    private  val TAG = "BaseFragment"
+
     private var _binding: VBinding? = null
 
     protected val binding get() = _binding!!
@@ -29,6 +32,7 @@ abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG, "onCreateView: binding data $_binding")
         return binding.root
     }
 
