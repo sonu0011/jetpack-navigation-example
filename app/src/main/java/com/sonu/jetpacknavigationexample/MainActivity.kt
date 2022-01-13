@@ -5,25 +5,35 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var bottomNav: BottomNavigationView
+    private lateinit var toolbar: Toolbar
+    private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
+        bottomNav = findViewById(R.id.home_bottom_nav)
         val navHost = supportFragmentManager.findFragmentById(R.id.home_nav) as NavHostFragment
         navController = navHost.navController
 
         setSupportActionBar(toolbar)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.searchFragment,R.id.homeFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        bottomNav.setupWithNavController(navController)
 
-        setupActionBarWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

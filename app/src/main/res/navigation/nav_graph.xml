@@ -60,4 +60,9 @@
     <action
         android:id="@+id/action_global_termsAndConditionsFragment"
         app:destination="@id/termsAndConditionsFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.sonu.jetpacknavigationexample.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_terms" />
 </navigation>
