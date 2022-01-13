@@ -9,30 +9,35 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sonu.jetpacknavigationexample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    private lateinit var bottomNav: BottomNavigationView
-    private lateinit var toolbar: Toolbar
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        toolbar = findViewById(R.id.toolbar)
-        bottomNav = findViewById(R.id.home_bottom_nav)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         val navHost = supportFragmentManager.findFragmentById(R.id.home_nav) as NavHostFragment
         navController = navHost.navController
 
-        setSupportActionBar(toolbar)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.searchFragment,R.id.homeFragment))
+        setSupportActionBar(binding.toolbar)
+
+        //for showing the hamburger icon we have to pass drawerLayout
+        appBarConfiguration =
+            AppBarConfiguration(
+                setOf(R.id.searchFragment, R.id.homeFragment),
+                binding.drawerLayout
+            )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
-        bottomNav.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
+        binding.homeBottomNav.setupWithNavController(navController)
 
     }
 
@@ -53,6 +58,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        //for handling drawer hamburger click we have to pass appbarConfiguration
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+
     }
 }
